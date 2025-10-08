@@ -1,0 +1,21 @@
+{
+  "name": "Gênio da Garrafa",
+  "short_name": "Gênio",
+  "start_url": "genio.html",
+  "display": "standalone",
+  "background_color": "#a8e063",
+  "theme_color": "#56ab2f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

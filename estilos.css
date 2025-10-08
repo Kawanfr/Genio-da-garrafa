@@ -1,0 +1,379 @@
+/* Estilo Básico do CSS */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
+}
+.app-container {
+    width: 375px; /* Simula a largura de um smartphone */
+    height: 667px; /* Simula a altura de um smartphone */
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.screen {
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 15px; /* 20px em cima/baixo, 15px nas laterais */
+    text-align: center;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+.screen.active {
+    display: flex;
+}
+.logo {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+h1 {
+    color: #333;
+    font-size: 1.5em;
+}
+p {
+    font-size: 1em;
+    color: #666;
+    margin-top: 0;
+}
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn:hover {
+    background-color: #45a049;
+}
+.question-btn {
+    background-color: #ddd;
+    color: #333;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-family: inherit; /* Garante que o botão use a fonte do body */
+    font-size: 0.9em; /* Ajuste de fonte para o botão */
+    border: 1px solid #ccc;
+}
+.question-btn.selected {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+#suggestion-card {
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    width: 90%;
+    max-width: 300px;
+    text-align: left;
+    display: none; /* Inicia escondido */
+}
+#suggestion-card h2 {
+    margin-top: 0;
+    color: #4CAF50;
+}
+
+/* --- Animações e Estilo da Tela Inicial --- */
+
+#onboarding-screen {
+    background: linear-gradient(180deg, #a8e063 0%, #56ab2f 100%);
+    color: white;
+    position: relative; /* Necessário para o pseudo-elemento */
+    overflow: hidden; /* Garante que os emojis não vazem */
+}
+
+#onboarding-screen::before {
+    content: "🍔 🍸 💖 🍻 🎵 ☕️ 💃 🥂 🍕 🍷 💖 🍹 🎵 🍔 🍻 ☕️ 💃 🍸 💖 🍕 🥂 🎵 🍷 🍹 🍔 🍻 💖 ☕️ 💃 🍸 🥂 🎵 🍕 🍷 🍹";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 2.5em;
+    color: white;
+    opacity: 0.05; /* Opacidade bem baixa para ser sutil */
+    line-height: 1.7;
+    text-align: center;
+    word-wrap: break-word;
+    transform: rotate(-30deg) scale(1.5); /* Inclina e aumenta os emojis */
+}
+
+#onboarding-screen .logo,
+#onboarding-screen h1,
+#onboarding-screen p,
+#onboarding-screen .btn {
+    position: relative; /* Garante que o conteúdo fique sobre a camada de emojis */
+    z-index: 2;
+}
+
+
+#onboarding-screen h1,
+#onboarding-screen p {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+#onboarding-screen .logo {
+    color: white; /* Garante que o logo fique branco no gradiente */
+    animation: float 3s ease-in-out infinite;
+}
+
+#onboarding-screen h1 {
+    animation: fadeIn 1s ease-in;
+}
+
+#onboarding-screen p {
+    animation: fadeIn 1.5s ease-in;
+}
+
+#onboarding-screen .btn {
+    animation: pulse 2s infinite;
+    border: 2px solid white;
+}
+
+.crystal-ball {
+    font-size: 0.5em; /* Metade do tamanho do gênio */
+    vertical-align: middle; /* Alinha verticalmente com o gênio */
+    transition: opacity 0.3s ease-in-out; /* Adiciona transição para opacidade */
+}
+
+.crystal-ball.fade-out {
+    opacity: 0;
+}
+
+/* --- Estilos dos Favoritos --- */
+
+.btn-secondary {
+    background-color: #6c757d;
+    padding: 15px 30px; /* Match .btn */
+    font-size: 1em; /* Match .btn */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    margin-right: 20px;
+    padding: 0;
+    color: #ff4757;
+    transition: transform 0.2s;
+}
+
+.btn-icon:hover {
+    transform: scale(1.2);
+}
+
+#favorites-screen {
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+#favorites-list {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.favorite-card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.favorite-card h2 {
+    margin-top: 0;
+    color: #4CAF50;
+    font-size: 1.2em;
+}
+
+.favorite-card p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+/* --- Keyframes para as Animações --- */
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px 15px rgba(255, 255, 255, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+#questions-screen {
+    background: linear-gradient(180deg, #a8e063 0%, #56ab2f 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+#questions-screen h1 {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+#questions-screen p {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    font-size: 1.2em; /* Increased font size */
+    font-weight: bold; /* Added bold font weight */
+}
+
+#questions-screen .question-btn {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+#questions-screen .question-btn.selected {
+    background-color: white;
+    color: #4CAF50;
+}
+
+#questions-screen .btn {
+    border: 2px solid white;
+}
+
+/* --- Estilos da Tela de Lista --- */
+
+#list-screen {
+    justify-content: flex-start;
+    overflow-y: auto;
+    padding: 20px 0;
+    background: linear-gradient(180deg, #a8e063 0%, #56ab2f 100%); /* Fundo gradiente verde */
+}
+
+#list-screen h1 {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+#all-suggestions-list {
+    width: 100%;
+}
+
+.category-container {
+    margin-bottom: 20px;
+}
+
+.category-container h2 {
+    color: white;
+    font-size: 1.3em;
+    padding-left: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* Efeito de brilho/sombra */
+}
+
+#list-screen .btn {
+    border: 2px solid white;
+    animation: pulse 2s infinite;
+}
+
+.list-item {
+    background-color: #fff;
+    padding: 15px;
+    margin: 0 15px 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.list-item h3 {
+    margin: 0 0 5px 0;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-item .budget {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 0.8em;
+    padding: 3px 8px;
+    border-radius: 50px;
+}
+
+.list-item p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.list-item a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.list-item a:hover {
+    text-decoration: underline;
+}

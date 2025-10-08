@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gênio da Garrafa - Esboço</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#56ab2f"/>
+</head>
+<body>
+
+<div class="app-container">
+
+    <div id="onboarding-screen" class="screen active">
+        <div class="logo">🧞‍♂️<span class="crystal-ball">🔮</span></div>
+        <h1>Bem-vindo(a) ao Gênio da Garrafa!</h1>
+        <p>Sua única sugestão para experiências locais incríveis.</p>
+        <button id="btn-onboarding" class="btn">Entrar</button>
+    </div>
+
+    <div id="questions-screen" class="screen">
+        <p>O que você procura hoje?</p>
+        <h1>Qual a vibe?</h1>
+        <div id="vibe-options">
+            <button type="button" class="question-btn">Tranquilo</button>
+            <button type="button" class="question-btn">Agitado</button>
+            <button type="button" class="question-btn">Romântico</button>
+        </div>
+        <h1>Qual o orçamento?</h1>
+        <div id="budget-options">
+            <button type="button" class="question-btn">R$</button>
+            <button type="button" class="question-btn">R$$</button>
+            <button type="button" class="question-btn">R$$$</button>
+        </div>
+        <div class="button-group">
+            <button id="btn-suggest" class="btn">Pedir Sugestão</button>
+            <button id="btn-lucky" class="btn btn-secondary">Estou com Sorte</button>
+            <button id="btn-list-all" class="btn btn-secondary">Ver Todas as Opções</button>
+        </div>
+    </div>
+
+    <div id="suggestion-screen" class="screen">
+        <div class="logo">✨</div>
+        <h1>O Gênio tem uma sugestão para você!</h1>
+        <p>Baseado na vibe do momento e no que outros usuários curtiram:</p>
+        <div id="suggestion-card">
+            <h2>Bar do Zé</h2>
+            <p>Um lugar descontraído e com a melhor cerveja artesanal da região. <strong>"A vibe está bombando!"</strong> - avaliação de um usuário próximo.</p>
+            <p><small id="suggestion-hours"></small></p>
+            <p id="suggestion-address"></p>
+        </div>
+        <button id="btn-back" class="btn">Voltar</button>
+    </div>
+
+    <div id="list-screen" class="screen">
+        <h1>Todas as Sugestões</h1>
+        <div id="all-suggestions-list">
+            <!-- JS will populate this -->
+        </div>
+        <button id="btn-back-from-list" class="btn">Voltar</button>
+    </div>
+
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
