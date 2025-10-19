@@ -20,6 +20,7 @@
     </div>
 
     <div id="questions-screen" class="screen">
+        <div class="logo">🧞‍♂️<span class="crystal-ball">🔮</span></div>
         <p>O que você procura hoje?</p>
         <h1>Qual a vibe?</h1>
         <div id="vibe-options">
@@ -37,6 +38,7 @@
             <button id="btn-suggest" class="btn">Pedir Sugestão</button>
             <button id="btn-lucky" class="btn btn-secondary">Estou com Sorte</button>
             <button id="btn-list-all" class="btn btn-secondary">Ver Todas as Opções</button>
+            <button id="btn-feed" class="btn btn-secondary">Ver Feed</button>
         </div>
     </div>
 
@@ -49,16 +51,41 @@
             <p>Um lugar descontraído e com a melhor cerveja artesanal da região. <strong>"A vibe está bombando!"</strong> - avaliação de um usuário próximo.</p>
             <p><small id="suggestion-hours"></small></p>
             <p id="suggestion-address"></p>
+            <div id="suggestion-promotion"></div>
+            <div class="suggestion-actions">
+                <button id="btn-evaluate" class="btn btn-secondary">📍 Avaliar Ambiente</button>
+            </div>
         </div>
         <button id="btn-back" class="btn">Voltar</button>
     </div>
 
     <div id="list-screen" class="screen">
+        <div class="logo">🧞‍♂️<span class="crystal-ball">🔮</span></div>
         <h1>Todas as Sugestões</h1>
         <div id="all-suggestions-list">
-            <!-- JS will populate this -->
+            <div class="loader"></div>
         </div>
         <button id="btn-back-from-list" class="btn">Voltar</button>
+    </div>
+
+    <div id="feed-screen" class="screen">
+        <h1>Feed de Hoje</h1>
+        <div id="feed-content">
+            <!-- JS will populate this -->
+        </div>
+        <button id="btn-back-from-feed" class="btn">Voltar</button>
+    </div>
+
+    <div id="feedback-screen" class="screen">
+        <h1>Como está o ambiente?</h1>
+        <p id="feedback-establishment-name">Nome do Local</p>
+        <div id="feedback-options" class="question-options">
+            <button type="button" class="question-btn">Vazio 썰렁</button>
+            <button type="button" class="question-btn">Agradável 😊</button>
+            <button type="button" class="question-btn">Cheio 🔥</button>
+        </div>
+        <button id="btn-submit-feedback" class="btn">Enviar Feedback</button>
+        <button id="btn-cancel-feedback" class="btn btn-secondary">Cancelar</button>
     </div>
 
 </div>

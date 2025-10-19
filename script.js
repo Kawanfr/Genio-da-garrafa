@@ -3,6 +3,9 @@ const screens = document.querySelectorAll('.screen');
 const onboardingScreen = document.getElementById('onboarding-screen');
 const questionsScreen = document.getElementById('questions-screen');
 const suggestionScreen = document.getElementById('suggestion-screen');
+const feedScreen = document.getElementById('feed-screen');
+const feedbackScreen = document.getElementById('feedback-screen');
+
 
 const btnOnboarding = document.getElementById('btn-onboarding');
 const btnSuggest = document.getElementById('btn-suggest');
@@ -10,11 +13,17 @@ const btnLucky = document.getElementById('btn-lucky');
 const btnBack = document.getElementById('btn-back');
 
 const suggestionCard = document.getElementById('suggestion-card');
-const crystalBall = document.querySelector('.crystal-ball'); // Seleciona o elemento da bola de cristal
+const crystalBalls = document.querySelectorAll('.crystal-ball'); // Seleciona TODOS os elementos da bola de cristal
 const listScreen = document.getElementById('list-screen');
 const allSuggestionsList = document.getElementById('all-suggestions-list');
 const btnListAll = document.getElementById('btn-list-all');
 const btnBackFromList = document.getElementById('btn-back-from-list');
+const btnFeed = document.getElementById('btn-feed');
+const btnBackFromFeed = document.getElementById('btn-back-from-feed');
+const btnEvaluate = document.getElementById('btn-evaluate');
+const btnSubmitFeedback = document.getElementById('btn-submit-feedback');
+const btnCancelFeedback = document.getElementById('btn-cancel-feedback');
+
 
 // Emojis para a transição
 const emojis = ['🍻', '☕', '🍸', '🍽️', '🎶', '🎉', '🍕', '📍'];
@@ -22,49 +31,72 @@ let currentEmojiIndex = 0;
 
 // Função para trocar o emoji da bola de cristal
 function changeCrystalBallEmoji() {
-    crystalBall.classList.add('fade-out'); // Adiciona classe para fade-out
-    setTimeout(() => {
-        currentEmojiIndex = (currentEmojiIndex + 1) % emojis.length;
-        crystalBall.textContent = emojis[currentEmojiIndex];
-        crystalBall.classList.remove('fade-out'); // Remove para fade-in
-    }, 200); // Tempo para o fade-out
+    // Itera sobre todas as bolas de cristal encontradas
+    crystalBalls.forEach(ball => {
+        ball.classList.add('fade-out'); // Adiciona classe para fade-out
+        setTimeout(() => {
+            // O cálculo do índice é feito apenas uma vez
+            const nextEmojiIndex = (currentEmojiIndex + 1) % emojis.length;
+            ball.textContent = emojis[nextEmojiIndex];
+            ball.classList.remove('fade-out'); // Remove para fade-in
+        }, 200); // Tempo para o fade-out
+    });
+    currentEmojiIndex = (currentEmojiIndex + 1) % emojis.length; // Atualiza o índice para a próxima rodada
 }
 
 // Inicia a transição de emojis a cada 1 segundo
 setInterval(changeCrystalBallEmoji, 1000);
 
+// --- Banco de Dados de Sugestões (Carregado do JSON) ---
+let suggestions = [];
 
-// --- Banco de Dados de Sugestões ---
-const suggestions = [
-    // --- Agitado ---
-    { name: "Noname Boteco", vibe: "Agitado", budget: "R$", description: "Cerveja gelada e petiscos em um ambiente despojado com cadeiras de praia.", horario: "Seg-Qua: 18h-00h, Qui-Sex: 18h-01h, Sáb: 17h-01h", address: "Rua dos Pinheiros, 585 - Pinheiros, São Paulo - SP" },
-    { name: "Estepe Bar", vibe: "Agitado", budget: "R$", description: "Bar de esquina com mesinhas na calçada, conhecido por atrair um público jovem e descolado.", horario: "Seg-Dom: 15h-00h", address: "Rua Cunha Gago, 588 - Pinheiros, São Paulo - SP" },
-    { name: "Pirajá", vibe: "Agitado", budget: "R$", description: "Famoso pelo chopp gelado e clima de boteco carioca.", horario: "Seg-Dom: 12h-00h", address: "Avenida Brigadeiro Faria Lima, 64 - Pinheiros, São Paulo - SP" },
-    { name: "Pitico", vibe: "Agitado", budget: "R$", description: "Quintal descontraído com cadeiras de praia, ótimo para ir em grupo.", horario: "Ter-Sex: 16h-22h, Sáb-Dom: 14h-22h", address: "Rua Guaicuí, 61 - Pinheiros, São Paulo - SP" },
-    { name: "Guilhotina Bar", vibe: "Agitado", budget: "R$", description: "Bar de coquetelaria premiado, para quem busca drinks de alta qualidade.", horario: "Ter-Sex: 18h-01h, Sáb: 17h-01h", address: "Rua Costa Carvalho, 84 - Pinheiros, São Paulo - SP" },
-    { name: "Casa Natura Musical", vibe: "Agitado", budget: "R$", description: "Palco para grandes nomes e novos talentos da música brasileira.", horario: "Shows a partir das 17h (consultar agenda)", address: "Rua Artur de Azevedo, 2134 - Pinheiros, São Paulo - SP" },
-    { name: "D-EDGE", vibe: "Agitado", budget: "R$", description: "Para quem quer dançar a noite toda ao som dos melhores DJs.", horario: "Sex-Sáb: 23h-06h", address: "Avenida Auro Soares de Moura Andrade, 141 - Barra Funda, São Paulo - SP" },
+// --- Variável para guardar a sugestão atual ---
+let currentSuggestion = null;
 
-    // --- Tranquilo ---
-    { name: "Café Habitual", vibe: "Tranquilo", budget: "R$", description: "Ambiente agradável que funciona das 8h às 18h, ótimo para um café durante o dia.", horario: "Seg-Dom: 08h-18h", address: "Rua Cônego Eugênio Leite, 1152 - Pinheiros, São Paulo - SP" },
-    { name: "Por um Punhado de Dólares", vibe: "Tranquilo", budget: "R$", description: "Café com personalidade, bom Wi-Fi e preços justos. Ambiente retrô.", horario: "Seg-Sáb: 10h-22h", address: "Rua Nestor Pestana, 115 - Consolação, São Paulo - SP" },
-    { name: "Feira da Benedito Calixto", vibe: "Tranquilo", budget: "R$", description: "Um passeio de sábado para caminhar e olhar antiguidades.", horario: "Sábados: 09h-19h", address: "Praça Benedito Calixto, s/n - Pinheiros, São Paulo - SP" },
-    { name: "Sofá Café", vibe: "Tranquilo", budget: "R$", description: "Ambiente super aconchegante para um café especial.", horario: "Seg-Sex: 8h-18:30h, Sáb: 10h-18h", address: "Rua Bianchi Bertoldi, 130 - Pinheiros, São Paulo - SP" },
-    { name: "King of The Fork (KOF)", vibe: "Tranquilo", budget: "R$", description: "Mistura de café de alta qualidade com cultura do ciclismo.", horario: "Seg-Sex: 07:30-19h, Sáb: 09h-18h", address: "Rua Artur de Azevedo, 1317 - Pinheiros, São Paulo - SP" },
-    { name: "Gaarden Bar", vibe: "Tranquilo", budget: "R$", description: "Espaço aberto e cheio de plantas, com atmosfera relaxante.", horario: "Ter-Qui: 12h-00h, Sex-Sáb: 12h-01h, Dom: 12h-18h", address: "Rua Fernão Dias, 672 - Pinheiros, São Paulo - SP" },
-    { name: "Frida & Mina", vibe: "Tranquilo", budget: "R$", description: "Sorvetes artesanais com ingredientes orgânicos e sazonais, sem conservantes.", horario: "Ter-Dom: 12h-20h", address: "Rua Guaicuí, 26 - Pinheiros, São Paulo - SP" },
-    { name: "Albero dei Gelati", vibe: "Tranquilo", budget: "R$", description: "Gelateria italiana que usa ingredientes naturais e frescos de pequenos produtores.", horario: "Seg-Dom: 10h-23h", address: "Rua dos Pinheiros, 342 - Pinheiros, São Paulo - SP" },
+// --- Gerenciamento de "Seguindo" (Follows) ---
+const FOLLOW_KEY = 'followed_establishments';
+const TWENTY_FOUR_HOURS_IN_MS = 24 * 60 * 60 * 1000;
 
-    // --- Romântico ---
-    { name: "Prosa e Vinho", vibe: "Romântico", budget: "R$", description: "Misto de loja e bar com vinhos acessíveis de mais de 15 países.", horario: "Seg-Qua: 12h-22h, Qui-Sex: 12h-23h, Sáb: 12h-22h", address: "Praça Dom José Gaspar, 106 - República, São Paulo - SP" },
-    { name: "Jazz nos Fundos", vibe: "Romântico", budget: "R$", description: "Para casais que gostam de música, com entrada acessível.", horario: "Ter-Sáb: a partir das 19h", address: "Rua Cardeal Arcoverde, 742 - Pinheiros, São Paulo - SP" },
-    { name: "Praça do Pôr do Sol", vibe: "Romântico", budget: "R$", description: "Gratuito e muito romântico para um fim de tarde.", horario: "Aberto 24h", address: "Praça Coronel Custódio Fernandes Pinheiro, 334 - Alto de Pinheiros, São Paulo - SP" },
-    { name: "Chou", vibe: "Romântico", budget: "R$", description: "Quintal charmoso com luzinhas, especializado em grelhados.", horario: "Ter-Qui: 19h-23:30h, Sex: 19h-00h, Sáb: 13h-16h e 19:30h-00h", address: "Rua Mateus Grou, 345 - Pinheiros, São Paulo - SP" },
-    { name: "Le Jazz Brasserie", vibe: "Romântico", budget: "R$", description: "Clássico bistrô francês com ambiente à meia-luz.", horario: "Dom-Qui: 12h-00h, Sex-Sáb: 12h-01h", address: "Rua dos Pinheiros, 254 - Pinheiros, São Paulo - SP" },
-    { name: "Bottega 21", vibe: "Romântico", budget: "R$", description: "Bar de vinhos e restaurante italiano, muito acolhedor.", horario: "Seg-Sáb: 19h-01h", address: "Rua dos Pinheiros, 1308 - Pinheiros, São Paulo - SP" },
-    { name: "Blue Note São Paulo", vibe: "Romântico", budget: "R$$", description: "Famoso clube de jazz com shows intimistas e ambiente sofisticado na Av. Paulista.", horario: "Shows às 20h e 22h30 (consultar agenda)", address: "Avenida Paulista, 2073 - 2º Andar - Consolação, São Paulo - SP" }
-];
+function getFollowed() {
+    const followed = JSON.parse(localStorage.getItem(FOLLOW_KEY)) || {};
+    const now = new Date().getTime();
+    // Filtra os follows que expiraram
+    const validFollows = {};
+    for (const id in followed) {
+        if (now < followed[id].expiresAt) {
+            validFollows[id] = followed[id];
+        }
+    }
+    localStorage.setItem(FOLLOW_KEY, JSON.stringify(validFollows));
+    return validFollows;
+}
 
+function toggleFollow(establishmentId) {
+    const followed = getFollowed();
+    if (followed[establishmentId]) {
+        delete followed[establishmentId]; // Deixar de seguir
+    } else {
+        followed[establishmentId] = { expiresAt: new Date().getTime() + TWENTY_FOUR_HOURS_IN_MS }; // Seguir
+    }
+    localStorage.setItem(FOLLOW_KEY, JSON.stringify(followed));
+}
+
+// --- Gerenciamento de "Curtidas" (Likes) ---
+const LIKED_POSTS_KEY = 'liked_posts';
+
+function getLikedPosts() {
+    return JSON.parse(localStorage.getItem(LIKED_POSTS_KEY)) || [];
+}
+
+function toggleLike(postId) {
+    let likedPosts = getLikedPosts();
+    if (likedPosts.includes(postId)) {
+        likedPosts = likedPosts.filter(id => id !== postId); // Descurtir
+    } else {
+        likedPosts.push(postId); // Curtir
+    }
+    localStorage.setItem(LIKED_POSTS_KEY, JSON.stringify(likedPosts));
+}
 // Função para gerenciar a troca de telas
 function showScreen(screenToShow) {
     screens.forEach(screen => {
@@ -74,7 +106,8 @@ function showScreen(screenToShow) {
 }
 
 // Função para popular a lista de todos os estabelecimentos
-function populateListScreen() {
+function populateListScreen(suggestions) {
+    const followed = getFollowed();
     allSuggestionsList.innerHTML = ''; // Limpa a lista existente
     const categories = {
         'Agitado': [],
@@ -99,22 +132,114 @@ function populateListScreen() {
         categories[category].forEach(suggestion => {
             const item = document.createElement('div');
             item.classList.add('list-item');
+            const isFollowing = !!followed[suggestion.id];
+            const promotionHTML = suggestion.promotion ? `<div class="promotion-banner">🎉 ${suggestion.promotion}</div>` : '';
             item.innerHTML = `
-                <h3>${suggestion.name} <span class="budget">${suggestion.budget}</span></h3>
+                <h3>
+                    ${suggestion.name}
+                    <button class="btn-follow ${isFollowing ? 'following' : ''}" data-id="${suggestion.id}">
+                        ${isFollowing ? 'Seguindo 🌟' : 'Seguir 24h'}
+                    </button>
+                </h3>
                 <p><small>${suggestion.horario}</small></p>
                 <p><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(suggestion.address)}" target="_blank">📍 ${suggestion.address}</a></p>
+                ${promotionHTML}
             `;
             categoryContainer.appendChild(item);
         });
 
         allSuggestionsList.appendChild(categoryContainer);
     }
+
+    // Adiciona o listener para os botões de seguir
+    allSuggestionsList.querySelectorAll('.btn-follow').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const id = e.target.dataset.id;
+            toggleFollow(id);
+            // Atualiza a aparência do botão sem recarregar a tela inteira
+            const isFollowing = e.target.classList.toggle('following');
+            e.target.textContent = isFollowing ? 'Seguindo 🌟' : 'Seguir 24h';
+        });
+    });
+}
+
+// Função para popular a tela de Feed
+function populateFeedScreen() {
+    const feedContent = document.getElementById('feed-content');
+    feedContent.innerHTML = ''; // Limpa o feed
+
+    const likedPosts = getLikedPosts();
+    const followed = getFollowed();
+    const followedIds = Object.keys(followed);
+
+    if (followedIds.length === 0) {
+        feedContent.innerHTML = '<p style="text-align: center; color: #666;">Você ainda não está seguindo nenhum estabelecimento. Vá para "Ver Todas as Opções" e siga alguns para ver os posts aqui!</p>';
+        return;
+    }
+
+    const posts = [];
+    suggestions.forEach(establishment => {
+        if (followedIds.includes(establishment.id.toString()) && establishment.posts && establishment.posts.length > 0) {
+            establishment.posts.forEach(post => {
+                posts.push({ ...post, establishmentName: establishment.name });
+            });
+        }
+    });
+
+    // Ordena os posts pelo mais recente (simulado pelo timestamp)
+    posts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+    if (posts.length === 0) {
+        feedContent.innerHTML = '<p style="text-align: center; color: #666;">Nenhum post novo dos estabelecimentos que você segue.</p>';
+        return;
+    }
+
+    posts.forEach(post => {
+        const postCard = document.createElement('div');
+        postCard.className = 'post-card';
+        const isLiked = likedPosts.includes(post.postId);
+
+        postCard.innerHTML = `
+            <div class="post-header">
+                <h3>${post.establishmentName}</h3>
+            </div>
+            <img src="${post.url}" alt="Post de ${post.establishmentName}" class="post-image">
+            <div class="post-actions">
+                <button class="post-like-btn ${isLiked ? 'liked' : ''}" data-post-id="${post.postId}">❤️</button>
+            </div>
+            <div class="post-caption">
+                <p>${post.caption}</p>
+            </div>
+        `;
+        feedContent.appendChild(postCard);
+    });
+
+    // Adiciona listeners para os botões de like
+    feedContent.querySelectorAll('.post-like-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const postId = parseInt(e.target.dataset.postId, 10);
+            if (!postId) return;
+
+            // Salva o estado da curtida
+            toggleLike(postId);
+
+            // Atualiza a aparência do botão
+            e.target.classList.toggle('liked');
+        });
+    });
 }
 
 // Ações dos botões
 btnOnboarding.addEventListener('click', () => showScreen(questionsScreen));
 
-btnSuggest.addEventListener('click', () => {
+btnFeed.addEventListener('click', () => {
+    populateFeedScreen();
+    showScreen(feedScreen);
+});
+
+btnBackFromFeed.addEventListener('click', () => showScreen(questionsScreen));
+
+btnSuggest.addEventListener('click', async () => {
     const selectedVibeBtn = document.querySelector('#vibe-options .selected');
     const selectedBudgetBtn = document.querySelector('#budget-options .selected');
 
@@ -132,18 +257,28 @@ btnSuggest.addEventListener('click', () => {
     const suggestionDescription = suggestionCard.querySelector('p');
     const suggestionHours = document.getElementById('suggestion-hours');
     const suggestionAddress = document.getElementById('suggestion-address');
+    const suggestionPromotion = document.getElementById('suggestion-promotion');
 
     if (filteredSuggestions.length > 0) {
         const randomSuggestion = filteredSuggestions[Math.floor(Math.random() * filteredSuggestions.length)];
+        currentSuggestion = randomSuggestion; // Guarda a sugestão atual
         suggestionTitle.innerText = randomSuggestion.name;
         suggestionDescription.innerText = randomSuggestion.description;
         suggestionHours.innerText = "Horário: " + randomSuggestion.horario;
         suggestionAddress.innerHTML = `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(randomSuggestion.address)}" target="_blank">📍 Endereço: ${randomSuggestion.address}</a>`;
+
+        if (randomSuggestion.promotion) {
+            suggestionPromotion.innerHTML = `<div class="promotion-banner">🎉 ${randomSuggestion.promotion}</div>`;
+        } else {
+            suggestionPromotion.innerHTML = '';
+        }
     } else {
+        currentSuggestion = null; // Limpa a sugestão atual
         suggestionTitle.innerText = "Hmm, não encontrei nada!";
         suggestionDescription.innerHTML = 'Parece que o gênio não tem uma sugestão para essa combinação. Que tal <a href="#" id="link-show-all">ver todas as opções</a>?';
         suggestionHours.innerText = "";
         suggestionAddress.innerHTML = "";
+        suggestionPromotion.innerHTML = '';
 
         // Adiciona o listener para o link recém-criado
         document.getElementById('link-show-all').addEventListener('click', (e) => {
@@ -161,24 +296,60 @@ btnBack.addEventListener('click', () => {
     suggestionCard.style.display = 'none';
 });
 
-btnListAll.addEventListener('click', () => showScreen(listScreen));
+btnListAll.addEventListener('click', () => {
+    // Repopula a lista para garantir que os botões de seguir estejam atualizados
+    populateListScreen(suggestions);
+    showScreen(listScreen);
+});
 btnBackFromList.addEventListener('click', () => showScreen(questionsScreen));
 
-btnLucky.addEventListener('click', () => {
+btnLucky.addEventListener('click', async () => {
     const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+    currentSuggestion = randomSuggestion; // Guarda a sugestão atual
 
     const suggestionTitle = suggestionCard.querySelector('h2');
     const suggestionDescription = suggestionCard.querySelector('p');
     const suggestionHours = document.getElementById('suggestion-hours');
     const suggestionAddress = document.getElementById('suggestion-address');
+    const suggestionPromotion = document.getElementById('suggestion-promotion');
 
     suggestionTitle.innerText = randomSuggestion.name;
     suggestionDescription.innerText = randomSuggestion.description;
     suggestionHours.innerText = "Horário: " + randomSuggestion.horario;
     suggestionAddress.innerHTML = `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(randomSuggestion.address)}" target="_blank">📍 Endereço: ${randomSuggestion.address}</a>`;
 
+    if (randomSuggestion.promotion) {
+        suggestionPromotion.innerHTML = `<div class="promotion-banner">🎉 ${randomSuggestion.promotion}</div>`;
+    } else {
+        suggestionPromotion.innerHTML = '';
+    }
+
     showScreen(suggestionScreen);
     suggestionCard.style.display = 'block';
+});
+
+btnEvaluate.addEventListener('click', () => {
+    if (!currentSuggestion) return;
+
+    document.getElementById('feedback-establishment-name').innerText = currentSuggestion.name;
+    // Limpa qualquer seleção anterior
+    document.querySelectorAll('#feedback-options .question-btn').forEach(btn => btn.classList.remove('selected'));
+    showScreen(feedbackScreen);
+});
+
+btnCancelFeedback.addEventListener('click', () => {
+    showScreen(suggestionScreen);
+});
+
+btnSubmitFeedback.addEventListener('click', () => {
+    const selectedFeedback = document.querySelector('#feedback-options .selected');
+    if (!selectedFeedback) {
+        alert('Por favor, selecione uma opção para o ambiente.');
+        return;
+    }
+    // Por enquanto, apenas mostramos um alerta. No futuro, isso enviaria os dados para um servidor.
+    alert(`Obrigado pelo seu feedback sobre o ${currentSuggestion.name}! Você marcou o ambiente como: ${selectedFeedback.innerText}`);
+    showScreen(suggestionScreen);
 });
 
 // Ação de seleção dos botões de perguntas
@@ -190,8 +361,18 @@ document.querySelectorAll('.question-btn').forEach(button => {
     });
 });
 
-// Popula a lista de estabelecimentos ao carregar a página
-document.addEventListener('DOMContentLoaded', populateListScreen);
+// Carrega os dados do JSON e inicializa a aplicação
+async function initializeApp() {
+    try {
+        const response = await fetch('sugestoes.json');
+        suggestions = await response.json();
+        // Popula a lista principal na inicialização
+        populateListScreen(suggestions);
+    } catch (error) {
+        console.error('Falha ao carregar as sugestões:', error);
+        allSuggestionsList.innerHTML = '<p style="color: red; text-align: center;">Não foi possível carregar as sugestões. Tente novamente mais tarde.</p>';
+    }
+}
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -202,3 +383,6 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+// Inicia a aplicação
+document.addEventListener('DOMContentLoaded', initializeApp);
