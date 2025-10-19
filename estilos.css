@@ -556,3 +556,23 @@ p {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* --- Estilo do botão de voltar no cabeçalho --- */
+.btn-back-header {
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50px; /* Formato de pílula */
+    padding: 8px 18px; /* Espaçamento interno */
+    font-size: 0.9em;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s;
+}
+
+.btn-back-header:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -18,6 +18,7 @@ const listScreen = document.getElementById('list-screen');
 const allSuggestionsList = document.getElementById('all-suggestions-list');
 const btnListAll = document.getElementById('btn-list-all');
 const btnBackFromList = document.getElementById('btn-back-from-list');
+const btnBackFromListHeader = document.getElementById('btn-back-from-list-header');
 const btnFeed = document.getElementById('btn-feed');
 const btnBackFromFeed = document.getElementById('btn-back-from-feed');
 const btnEvaluate = document.getElementById('btn-evaluate');
@@ -302,6 +303,7 @@ btnListAll.addEventListener('click', () => {
     showScreen(listScreen);
 });
 btnBackFromList.addEventListener('click', () => showScreen(questionsScreen));
+btnBackFromListHeader.addEventListener('click', () => showScreen(questionsScreen));
 
 btnLucky.addEventListener('click', async () => {
     const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
