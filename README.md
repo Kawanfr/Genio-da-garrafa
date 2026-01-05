@@ -11,11 +11,13 @@ Este projeto nasceu como um esboço para demonstrar uma solução rápida e dive
 ## ✨ Funcionalidades
 
 *   **Seleção de "Vibe"**: Escolha entre `Tranquilo`, `Agitado` ou `Romântico`.
-*   **Seleção de Orçamento**: Defina o custo do local (`R$`, `R$$`, `R$$$`).
+*   **Seleção de Orçamento**: Defina o custo do local (`💰`, `💰💰`, `💰💰💰`).
 *   **Sugestão Mágica**: Receba uma sugestão baseada nas suas escolhas.
 *   **Estou com Sorte**: Deixe o Gênio escolher um lugar aleatório para você.
 *   **Detalhes Completos**: Visualize horários de funcionamento, promoções especiais e fotos recentes.
 *   **Listar Tudo**: Veja todas as opções disponíveis, organizadas por categoria.
+*   **Busca e Filtros**: Pesquise locais por nome e filtre rapidamente por promoções ativas.
+*   **Feed Personalizado**: Acompanhe fotos e promoções dos locais que você segue.
 *   **Mapa**: Links diretos para o endereço no Google Maps.
 
 ## ⚠️ Status do Projeto: Versão Inicial
