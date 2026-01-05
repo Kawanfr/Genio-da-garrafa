@@ -374,6 +374,43 @@ p {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
+.search-bar {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 0 auto 20px auto;
+    border-radius: 50px;
+    border: none;
+    font-size: 1em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    outline: none;
+    display: block;
+    font-family: inherit;
+}
+
+.filter-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    background-color: #ffc107;
+    color: #333;
+    border-color: #ffc107;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
 #all-suggestions-list {
     width: 100%;
 }
@@ -599,4 +636,33 @@ p {
 
 .btn-back-header:hover {
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* --- Toast Notification --- */
+#toast-container {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 90%;
+    pointer-events: none; /* Permite clicar através do container se vazio */
+}
+
+.toast {
+    background-color: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 50px;
+    margin-top: 10px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(20px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
 }

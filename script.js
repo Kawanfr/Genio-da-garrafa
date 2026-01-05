@@ -25,6 +25,8 @@ const btnEvaluate = document.getElementById('btn-evaluate');
 const btnShare = document.getElementById('btn-share');
 const btnSubmitFeedback = document.getElementById('btn-submit-feedback');
 const btnCancelFeedback = document.getElementById('btn-cancel-feedback');
+const searchInput = document.getElementById('search-input');
+const btnFilterPromo = document.getElementById('btn-filter-promo');
 
 
 // Emojis para a transição
@@ -99,6 +101,26 @@ function toggleLike(postId) {
     }
     localStorage.setItem(LIKED_POSTS_KEY, JSON.stringify(likedPosts));
 }
+
+// --- Sistema de Toast (Notificações) ---
+function showToast(message) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerText = message;
+    
+    container.appendChild(toast);
+
+    // Pequeno delay para permitir a transição CSS
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    // Remove após 3 segundos
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
 // Função para gerenciar a troca de telas
 function showScreen(screenToShow) {
     screens.forEach(screen => {
@@ -107,8 +129,11 @@ function showScreen(screenToShow) {
     screenToShow.classList.add('active');
 }
 
+// Estado do filtro de promoções
+let isPromoFilterActive = false;
+
 // Função para popular a lista de todos os estabelecimentos
-function populateListScreen(suggestions) {
+function populateListScreen(suggestionsData, filterText = '') {
     const followed = getFollowed();
     allSuggestionsList.innerHTML = ''; // Limpa a lista existente
     const categories = {
@@ -117,9 +142,21 @@ function populateListScreen(suggestions) {
         'Romântico': []
     };
 
+    const term = filterText.toLowerCase();
+
     // Agrupa as sugestões por categoria (vibe)
-    suggestions.forEach(suggestion => {
-        categories[suggestion.vibe].push(suggestion);
+    suggestionsData.forEach(suggestion => {
+        // Filtra por texto
+        const matchesText = suggestion.name.toLowerCase().includes(term) || 
+                            suggestion.address.toLowerCase().includes(term) ||
+                            suggestion.description.toLowerCase().includes(term);
+        
+        // Filtra por promoção (se o botão estiver ativo)
+        const matchesPromo = isPromoFilterActive ? !!suggestion.promotion : true;
+
+        if (matchesText && matchesPromo) {
+            categories[suggestion.vibe].push(suggestion);
+        }
     });
 
     // Cria o HTML para cada categoria
@@ -128,6 +165,8 @@ function populateListScreen(suggestions) {
         categoryContainer.classList.add('category-container');
 
         const categoryTitle = document.createElement('h2');
+        // Se a categoria estiver vazia devido ao filtro, não mostramos o título
+        if (categories[category].length === 0) continue;
         categoryTitle.innerText = category;
         categoryContainer.appendChild(categoryTitle);
 
@@ -153,6 +192,10 @@ function populateListScreen(suggestions) {
         allSuggestionsList.appendChild(categoryContainer);
     }
 
+    if (allSuggestionsList.innerHTML === '') {
+        allSuggestionsList.innerHTML = '<p style="text-align:center; color: white; margin-top: 20px;">Nenhum local encontrado com esse termo.</p>';
+    }
+
     // Adiciona o listener para os botões de seguir
     allSuggestionsList.querySelectorAll('.btn-follow').forEach(button => {
         button.addEventListener('click', (e) => {
@@ -161,6 +204,7 @@ function populateListScreen(suggestions) {
             // Atualiza a aparência do botão sem recarregar a tela inteira
             const isFollowing = e.target.classList.toggle('following');
             e.target.textContent = isFollowing ? 'Seguindo 🌟' : 'Seguir 24h';
+            if (isFollowing) showToast('Você está seguindo este local por 24h!');
         });
     });
 }
@@ -181,10 +225,27 @@ function populateFeedScreen() {
 
     const posts = [];
     suggestions.forEach(establishment => {
-        if (followedIds.includes(establishment.id.toString()) && establishment.posts && establishment.posts.length > 0) {
-            establishment.posts.forEach(post => {
-                posts.push({ ...post, establishmentName: establishment.name });
-            });
+        if (followedIds.includes(establishment.id.toString())) {
+            if (establishment.posts && establishment.posts.length > 0) {
+                establishment.posts.forEach(post => {
+                    posts.push({ ...post, establishmentName: establishment.name, type: 'post' });
+                });
+            }
+            if (establishment.promotion) {
+                // Usa a data do último post para misturar a promoção no feed, evitando que fiquem todas no topo
+                let promoTimestamp = new Date().toISOString();
+                if (establishment.posts && establishment.posts.length > 0) {
+                    const latestPost = establishment.posts.reduce((a, b) => new Date(a.timestamp) > new Date(b.timestamp) ? a : b);
+                    promoTimestamp = latestPost.timestamp;
+                }
+
+                posts.push({
+                    type: 'promotion',
+                    establishmentName: establishment.name,
+                    caption: establishment.promotion,
+                    timestamp: promoTimestamp
+                });
+            }
         }
     });
 
@@ -199,20 +260,35 @@ function populateFeedScreen() {
     posts.forEach(post => {
         const postCard = document.createElement('div');
         postCard.className = 'post-card';
-        const isLiked = likedPosts.includes(post.postId);
 
-        postCard.innerHTML = `
-            <div class="post-header">
-                <h3>${post.establishmentName}</h3>
-            </div>
-            <img src="${post.url}" alt="Post de ${post.establishmentName}" class="post-image">
-            <div class="post-actions">
-                <button class="post-like-btn ${isLiked ? 'liked' : ''}" data-post-id="${post.postId}">❤️</button>
-            </div>
-            <div class="post-caption">
-                <p>${post.caption}</p>
-            </div>
-        `;
+        if (post.type === 'promotion') {
+            postCard.innerHTML = `
+                <div class="post-header">
+                    <h3>${post.establishmentName}</h3>
+                </div>
+                <div style="padding: 30px 20px; text-align: center; background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%);">
+                    <div style="font-size: 3em; margin-bottom: 10px;">🎉</div>
+                    <h2 style="color: #333; margin: 0; font-size: 1.3em; font-weight: bold;">${post.caption}</h2>
+                </div>
+                <div class="post-caption">
+                    <p><strong>Promoção Especial!</strong> Aproveite enquanto dura.</p>
+                </div>
+            `;
+        } else {
+            const isLiked = likedPosts.includes(post.postId);
+            postCard.innerHTML = `
+                <div class="post-header">
+                    <h3>${post.establishmentName}</h3>
+                </div>
+                <img src="${post.url}" alt="Post de ${post.establishmentName}" class="post-image">
+                <div class="post-actions">
+                    <button class="post-like-btn ${isLiked ? 'liked' : ''}" data-post-id="${post.postId}">❤️</button>
+                </div>
+                <div class="post-caption">
+                    <p>${post.caption}</p>
+                </div>
+            `;
+        }
         feedContent.appendChild(postCard);
     });
 
@@ -249,7 +325,7 @@ btnSuggest.addEventListener('click', async () => {
     const selectedBudgetBtn = document.querySelector('#budget-options .selected');
 
     if (!selectedVibeBtn || !selectedBudgetBtn) {
-        alert("Por favor, selecione uma vibe e um orçamento para o gênio te ajudar!");
+        showToast("Por favor, selecione uma vibe e um orçamento!");
         return;
     }
 
@@ -315,6 +391,7 @@ btnBack.addEventListener('click', () => {
 btnListAll.addEventListener('click', () => {
     // Repopula a lista para garantir que os botões de seguir estejam atualizados
     populateListScreen(suggestions);
+    searchInput.value = ''; // Limpa a busca ao abrir
     showScreen(listScreen);
 });
 btnBackFromList.addEventListener('click', () => showScreen(questionsScreen));
@@ -376,7 +453,7 @@ btnSubmitFeedback.addEventListener('click', () => {
         return;
     }
     // Por enquanto, apenas mostramos um alerta. No futuro, isso enviaria os dados para um servidor.
-    alert(`Obrigado pelo seu feedback sobre o ${currentSuggestion.name}! Você marcou o ambiente como: ${selectedFeedback.innerText}`);
+    showToast(`Obrigado! Feedback enviado: ${selectedFeedback.innerText}`);
     showScreen(suggestionScreen);
 });
 
@@ -396,11 +473,23 @@ btnShare.addEventListener('click', async () => {
             // Fallback para navegadores que não suportam Web Share API (Desktop)
             const textToCopy = `${shareData.text}\n${shareData.url}`;
             await navigator.clipboard.writeText(textToCopy);
-            alert('Sugestão copiada para a área de transferência!');
+            showToast('Sugestão copiada para a área de transferência!');
         }
     } catch (err) {
         console.error('Erro ao compartilhar:', err);
     }
+});
+
+// Listener para a barra de busca
+searchInput.addEventListener('input', (e) => {
+    populateListScreen(suggestions, e.target.value);
+});
+
+// Listener para o botão de filtro de promoções
+btnFilterPromo.addEventListener('click', () => {
+    isPromoFilterActive = !isPromoFilterActive;
+    btnFilterPromo.classList.toggle('active');
+    populateListScreen(suggestions, searchInput.value);
 });
 
 // Ação de seleção dos botões de perguntas

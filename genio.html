@@ -30,9 +30,9 @@
         </div>
         <h1>Qual o orçamento?</h1>
         <div id="budget-options" role="group" aria-label="Selecione o orçamento">
-            <button type="button" class="question-btn" data-value="R$" aria-pressed="false">R$</button>
-            <button type="button" class="question-btn" data-value="R$$" aria-pressed="false">R$$</button>
-            <button type="button" class="question-btn" data-value="R$$$" aria-pressed="false">R$$$</button>
+            <button type="button" class="question-btn" data-value="R$" aria-pressed="false">💰</button>
+            <button type="button" class="question-btn" data-value="R$$" aria-pressed="false">💰💰</button>
+            <button type="button" class="question-btn" data-value="R$$$" aria-pressed="false">💰💰💰</button>
         </div>
         <div class="button-group">
             <button id="btn-suggest" class="btn">Pedir Sugestão</button>
@@ -64,6 +64,10 @@
         <button id="btn-back-from-list-header" class="btn-back-header">Voltar</button>
         <div class="logo">🧞‍♂️<span class="crystal-ball">🔮</span></div>
         <h1>Todas as Sugestões</h1>
+        <input type="text" id="search-input" placeholder="Buscar por nome ou endereço..." class="search-bar">
+        <div class="filter-container">
+            <button id="btn-filter-promo" class="filter-btn">🎉 Só Promoções</button>
+        </div>
         <div id="all-suggestions-list">
             <div class="loader"></div>
         </div>
@@ -89,6 +93,8 @@
         <button id="btn-submit-feedback" class="btn">Enviar Feedback</button>
         <button id="btn-cancel-feedback" class="btn btn-secondary">Cancelar</button>
     </div>
+
+    <div id="toast-container"></div>
 
 </div>
 
