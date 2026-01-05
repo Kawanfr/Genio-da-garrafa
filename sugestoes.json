@@ -20,7 +20,6 @@
     { "id": 7, "name": "D-EDGE", "vibe": "Agitado", "budget": "R$", "description": "Para quem quer dançar a noite toda ao som dos melhores DJs.", "horario": "Sex-Sáb: 23h-06h", "address": "Avenida Auro Soares de Moura Andrade, 141 - Barra Funda, São Paulo - SP", "posts": [
         { "postId": 110, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:05:00Z" }
     ] },
-
     { "id": 8, "name": "Café Habitual", "vibe": "Tranquilo", "budget": "R$", "description": "Ambiente agradável que funciona das 8h às 18h, ótimo para um café durante o dia.", "horario": "Seg-Dom: 08h-18h", "address": "Rua Cônego Eugênio Leite, 1152 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 111, "type": "photo", "url": "https://i.imgur.com/a5b2dPr.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:06:00Z" }
     ], "promotion": "Combo Brunch: Café + Tostada por preço especial." },
@@ -45,14 +44,13 @@
     { "id": 15, "name": "Albero dei Gelati", "vibe": "Tranquilo", "budget": "R$", "description": "Gelateria italiana que usa ingredientes naturais e frescos de pequenos produtores.", "horario": "Seg-Dom: 10h-23h", "address": "Rua dos Pinheiros, 342 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 117, "type": "photo", "url": "https://i.imgur.com/a5b2dPr.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:12:00Z" }
     ] },
-
     { "id": 16, "name": "Prosa e Vinho", "vibe": "Romântico", "budget": "R$", "description": "Misto de loja e bar com vinhos acessíveis de mais de 15 países.", "horario": "Seg-Qua: 12h-22h, Qui-Sex: 12h-23h, Sáb: 12h-22h", "address": "Praça Dom José Gaspar, 106 - República, São Paulo - SP", "posts": [
         { "postId": 118, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:13:00Z" }
     ], "promotion": "Taça de vinho do dia por R$ 15." },
-    { "id": 17, "name": "Jazz nos Fundos", "vibe": "Romântico", "budget": "R$", "description": "Para casais que gostam de música, com entrada acessível.", "horario": "Ter-Sáb: a partir das 19h", "address": "Rua Cardeal Arcoverde, 742 - Pinheiros, São Paulo - SP", "promotion": "Dose dupla de Gin Tônica nas noites de terça!", "posts": [
+    { "id": 17, "name": "Jazz nos Fundos", "vibe": "Romântico", "budget": "R$", "description": "Para casais que gostam de música, com entrada acessível.", "horario": "Ter-Sáb: a partir das 19h", "address": "Rua Cardeal Arcoverde, 742 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 102, "type": "photo", "url": "https://i.imgur.com/3O2Gz1p.jpeg", "caption": "Hoje tem noite de Jazz e Blues a partir das 20h. Garanta seu lugar!", "timestamp": "2024-07-26T19:30:00Z" },
         { "postId": 103, "type": "photo", "url": "https://i.imgur.com/YJgCmsA.jpeg", "caption": "Nosso drink especial da semana: 'Blue Note'. Já provou?", "timestamp": "2024-07-26T16:00:00Z" }
-    ]},
+    ], "promotion": "Dose dupla de Gin Tônica nas noites de terça!" },
     { "id": 18, "name": "Praça do Pôr do Sol", "vibe": "Romântico", "budget": "R$", "description": "Gratuito e muito romântico para um fim de tarde.", "horario": "Aberto 24h", "address": "Praça Coronel Custódio Fernandes Pinheiro, 334 - Alto de Pinheiros, São Paulo - SP", "posts": [
         { "postId": 119, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:14:00Z" }
     ] },

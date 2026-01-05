@@ -14,6 +14,7 @@ Este projeto nasceu como um esboço para demonstrar uma solução rápida e dive
 *   **Seleção de Orçamento**: Defina o custo do local (`R$`, `R$$`, `R$$$`).
 *   **Sugestão Mágica**: Receba uma sugestão baseada nas suas escolhas.
 *   **Estou com Sorte**: Deixe o Gênio escolher um lugar aleatório para você.
+*   **Detalhes Completos**: Visualize horários de funcionamento, promoções especiais e fotos recentes.
 *   **Listar Tudo**: Veja todas as opções disponíveis, organizadas por categoria.
 *   **Mapa**: Links diretos para o endereço no Google Maps.
 
@@ -21,7 +22,12 @@ Este projeto nasceu como um esboço para demonstrar uma solução rápida e dive
 
 Este é um protótipo inicial. Atualmente, as sugestões de locais estão **focadas na cidade de São Paulo, especialmente na região de Pinheiros**. A base de dados é pequena e serve como prova de conceito.
 
-Futuramente, o projeto pode evoluir para incluir mais locais, cidades e funcionalidades, como um sistema de avaliação de usuários em tempo real.
+### 🚀 Roadmap
+
+*   [ ] Expansão da base de dados para outros bairros e cidades.
+*   [ ] Filtros por características (ex: Pet Friendly, Música ao Vivo).
+*   [ ] Integração com APIs de mapas.
+*   [ ] Sistema de avaliação de usuários.
 
 ## 🔧 Como Usar
 
@@ -29,6 +35,14 @@ Futuramente, o projeto pode evoluir para incluir mais locais, cidades e funciona
 2.  Na tela de perguntas, selecione a vibe e o orçamento.
 3.  Clique em "Pedir Sugestão" ou "Estou com Sorte".
 4.  Para ver todas as opções, clique em "Ver Todas as Opções".
+
+## 📂 Estrutura de Dados
+
+As sugestões são alimentadas pelo arquivo `sugestoes.json`. Cada local possui:
+*   **Vibe**: Categoria do ambiente (`Tranquilo`, `Agitado`, `Romântico`).
+*   **Budget**: Faixa de preço.
+*   **Posts**: Imagens simulando um feed social.
+*   **Promotion**: Promoções ativas (quando houver).
 
 ## 📜 Licença
 
