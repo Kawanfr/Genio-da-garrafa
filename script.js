@@ -22,12 +22,13 @@ const btnBackFromListHeader = document.getElementById('btn-back-from-list-header
 const btnFeed = document.getElementById('btn-feed');
 const btnBackFromFeed = document.getElementById('btn-back-from-feed');
 const btnEvaluate = document.getElementById('btn-evaluate');
+const btnShare = document.getElementById('btn-share');
 const btnSubmitFeedback = document.getElementById('btn-submit-feedback');
 const btnCancelFeedback = document.getElementById('btn-cancel-feedback');
 
 
 // Emojis para a transição
-const emojis = ['🍻', '☕', '🍸', '🍽️', '🎶', '🎉', '🍕', '📍'];
+const emojis = ['🍻', '☕', '🍸', '🍽️', '🎶', '🎉', '🍕', '📍', '🍔', '🍷', '🍦', '🌮', '🍜', '🍰', '🕺', '🎷'];
 let currentEmojiIndex = 0;
 
 // Função para trocar o emoji da bola de cristal
@@ -240,6 +241,9 @@ btnFeed.addEventListener('click', () => {
 
 btnBackFromFeed.addEventListener('click', () => showScreen(questionsScreen));
 
+// Função auxiliar para criar um atraso (promessa)
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 btnSuggest.addEventListener('click', async () => {
     const selectedVibeBtn = document.querySelector('#vibe-options .selected');
     const selectedBudgetBtn = document.querySelector('#budget-options .selected');
@@ -249,8 +253,15 @@ btnSuggest.addEventListener('click', async () => {
         return;
     }
 
-    const vibe = selectedVibeBtn.innerText;
-    const budget = selectedBudgetBtn.innerText;
+    // Efeito de "Pensando"
+    const originalText = btnSuggest.innerText;
+    btnSuggest.innerText = "🔮 Consultando os astros...";
+    btnSuggest.disabled = true;
+
+    await wait(1500); // Espera 1.5 segundos para dar suspense
+
+    const vibe = selectedVibeBtn.dataset.value;
+    const budget = selectedBudgetBtn.dataset.value;
 
     const filteredSuggestions = suggestions.filter(place => place.vibe === vibe && place.budget === budget);
 
@@ -288,6 +299,10 @@ btnSuggest.addEventListener('click', async () => {
         });
     }
 
+    // Restaura o botão
+    btnSuggest.innerText = originalText;
+    btnSuggest.disabled = false;
+
     showScreen(suggestionScreen);
     suggestionCard.style.display = 'block';
 });
@@ -306,6 +321,13 @@ btnBackFromList.addEventListener('click', () => showScreen(questionsScreen));
 btnBackFromListHeader.addEventListener('click', () => showScreen(questionsScreen));
 
 btnLucky.addEventListener('click', async () => {
+    // Efeito de "Pensando"
+    const originalText = btnLucky.innerText;
+    btnLucky.innerText = "🎲 Embaralhando...";
+    btnLucky.disabled = true;
+
+    await wait(1500); // Espera 1.5 segundos
+
     const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
     currentSuggestion = randomSuggestion; // Guarda a sugestão atual
 
@@ -325,6 +347,10 @@ btnLucky.addEventListener('click', async () => {
     } else {
         suggestionPromotion.innerHTML = '';
     }
+
+    // Restaura o botão
+    btnLucky.innerText = originalText;
+    btnLucky.disabled = false;
 
     showScreen(suggestionScreen);
     suggestionCard.style.display = 'block';
@@ -354,12 +380,43 @@ btnSubmitFeedback.addEventListener('click', () => {
     showScreen(suggestionScreen);
 });
 
+btnShare.addEventListener('click', async () => {
+    if (!currentSuggestion) return;
+
+    const shareData = {
+        title: 'Sugestão do Gênio da Garrafa',
+        text: `Bora pro ${currentSuggestion.name}? A vibe é ${currentSuggestion.vibe} e o orçamento é ${currentSuggestion.budget}. \n\n📍 Endereço: ${currentSuggestion.address}`,
+        url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentSuggestion.address)}`
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else {
+            // Fallback para navegadores que não suportam Web Share API (Desktop)
+            const textToCopy = `${shareData.text}\n${shareData.url}`;
+            await navigator.clipboard.writeText(textToCopy);
+            alert('Sugestão copiada para a área de transferência!');
+        }
+    } catch (err) {
+        console.error('Erro ao compartilhar:', err);
+    }
+});
+
 // Ação de seleção dos botões de perguntas
 document.querySelectorAll('.question-btn').forEach(button => {
     button.addEventListener('click', () => {
         const group = button.parentElement;
-        group.querySelectorAll('.question-btn').forEach(btn => btn.classList.remove('selected'));
+        
+        // Remove seleção visual e semântica dos irmãos
+        group.querySelectorAll('.question-btn').forEach(btn => {
+            btn.classList.remove('selected');
+            btn.setAttribute('aria-pressed', 'false');
+        });
+
+        // Adiciona seleção ao clicado
         button.classList.add('selected');
+        button.setAttribute('aria-pressed', 'true');
     });
 });
 

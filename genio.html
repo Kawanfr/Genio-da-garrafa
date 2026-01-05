@@ -23,16 +23,16 @@
         <div class="logo">🧞‍♂️<span class="crystal-ball">🔮</span></div>
         <p>O que você procura hoje?</p>
         <h1>Qual a vibe?</h1>
-        <div id="vibe-options">
-            <button type="button" class="question-btn">Tranquilo</button>
-            <button type="button" class="question-btn">Agitado</button>
-            <button type="button" class="question-btn">Romântico</button>
+        <div id="vibe-options" role="group" aria-label="Selecione a vibe">
+            <button type="button" class="question-btn" data-value="Tranquilo" aria-pressed="false">Tranquilo</button>
+            <button type="button" class="question-btn" data-value="Agitado" aria-pressed="false">Agitado</button>
+            <button type="button" class="question-btn" data-value="Romântico" aria-pressed="false">Romântico</button>
         </div>
         <h1>Qual o orçamento?</h1>
-        <div id="budget-options">
-            <button type="button" class="question-btn">R$</button>
-            <button type="button" class="question-btn">R$$</button>
-            <button type="button" class="question-btn">R$$$</button>
+        <div id="budget-options" role="group" aria-label="Selecione o orçamento">
+            <button type="button" class="question-btn" data-value="R$" aria-pressed="false">R$</button>
+            <button type="button" class="question-btn" data-value="R$$" aria-pressed="false">R$$</button>
+            <button type="button" class="question-btn" data-value="R$$$" aria-pressed="false">R$$$</button>
         </div>
         <div class="button-group">
             <button id="btn-suggest" class="btn">Pedir Sugestão</button>
@@ -54,6 +54,7 @@
             <div id="suggestion-promotion"></div>
             <div class="suggestion-actions">
                 <button id="btn-evaluate" class="btn btn-secondary">📍 Avaliar Ambiente</button>
+                <button id="btn-share" class="btn btn-share">📤 Compartilhar</button>
             </div>
         </div>
         <button id="btn-back" class="btn">Voltar</button>

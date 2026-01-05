@@ -4,7 +4,7 @@
     ], "promotion": "Hoje tem double chopp até as 20h!"},
     { "id": 2, "name": "Estepe Bar", "vibe": "Agitado", "budget": "R$", "description": "Bar de esquina com mesinhas na calçada, conhecido por atrair um público jovem e descolado.", "horario": "Seg-Dom: 15h-00h", "address": "Rua Cunha Gago, 588 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 105, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:00:00Z" }
-    ] },
+    ], "promotion": "Caipirinha em dobro nas quartas-feiras!" },
     { "id": 3, "name": "Pirajá", "vibe": "Agitado", "budget": "R$", "description": "Famoso pelo chopp gelado e clima de boteco carioca.", "horario": "Seg-Dom: 12h-00h", "address": "Avenida Brigadeiro Faria Lima, 64 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 106, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:01:00Z" }
     ] },
@@ -13,7 +13,7 @@
     ] },
     { "id": 5, "name": "Guilhotina Bar", "vibe": "Agitado", "budget": "R$", "description": "Bar de coquetelaria premiado, para quem busca drinks de alta qualidade.", "horario": "Ter-Sex: 18h-01h, Sáb: 17h-01h", "address": "Rua Costa Carvalho, 84 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 108, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:03:00Z" }
-    ] },
+    ], "promotion": "20% off em drinks autorais até as 20h." },
     { "id": 6, "name": "Casa Natura Musical", "vibe": "Agitado", "budget": "R$", "description": "Palco para grandes nomes e novos talentos da música brasileira.", "horario": "Shows a partir das 17h (consultar agenda)", "address": "Rua Artur de Azevedo, 2134 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 109, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:04:00Z" }
     ] },
@@ -23,7 +23,7 @@
 
     { "id": 8, "name": "Café Habitual", "vibe": "Tranquilo", "budget": "R$", "description": "Ambiente agradável que funciona das 8h às 18h, ótimo para um café durante o dia.", "horario": "Seg-Dom: 08h-18h", "address": "Rua Cônego Eugênio Leite, 1152 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 111, "type": "photo", "url": "https://i.imgur.com/a5b2dPr.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:06:00Z" }
-    ] },
+    ], "promotion": "Combo Brunch: Café + Tostada por preço especial." },
     { "id": 9, "name": "Por um Punhado de Dólares", "vibe": "Tranquilo", "budget": "R$", "description": "Café com personalidade, bom Wi-Fi e preços justos. Ambiente retrô.", "horario": "Seg-Sáb: 10h-22h", "address": "Rua Nestor Pestana, 115 - Consolação, São Paulo - SP", "posts": [
         { "postId": 112, "type": "photo", "url": "https://i.imgur.com/a5b2dPr.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:07:00Z" }
     ] },
@@ -41,14 +41,14 @@
     ] },
     { "id": 14, "name": "Frida & Mina", "vibe": "Tranquilo", "budget": "R$", "description": "Sorvetes artesanais com ingredientes orgânicos e sazonais, sem conservantes.", "horario": "Ter-Dom: 12h-20h", "address": "Rua Guaicuí, 26 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 116, "type": "photo", "url": "https://i.imgur.com/a5b2dPr.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:11:00Z" }
-    ] },
+    ], "promotion": "Leve 1kg de sorvete e ganhe casquinhas artesanais." },
     { "id": 15, "name": "Albero dei Gelati", "vibe": "Tranquilo", "budget": "R$", "description": "Gelateria italiana que usa ingredientes naturais e frescos de pequenos produtores.", "horario": "Seg-Dom: 10h-23h", "address": "Rua dos Pinheiros, 342 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 117, "type": "photo", "url": "https://i.imgur.com/a5b2dPr.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:12:00Z" }
     ] },
 
     { "id": 16, "name": "Prosa e Vinho", "vibe": "Romântico", "budget": "R$", "description": "Misto de loja e bar com vinhos acessíveis de mais de 15 países.", "horario": "Seg-Qua: 12h-22h, Qui-Sex: 12h-23h, Sáb: 12h-22h", "address": "Praça Dom José Gaspar, 106 - República, São Paulo - SP", "posts": [
         { "postId": 118, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:13:00Z" }
-    ] },
+    ], "promotion": "Taça de vinho do dia por R$ 15." },
     { "id": 17, "name": "Jazz nos Fundos", "vibe": "Romântico", "budget": "R$", "description": "Para casais que gostam de música, com entrada acessível.", "horario": "Ter-Sáb: a partir das 19h", "address": "Rua Cardeal Arcoverde, 742 - Pinheiros, São Paulo - SP", "promotion": "Dose dupla de Gin Tônica nas noites de terça!", "posts": [
         { "postId": 102, "type": "photo", "url": "https://i.imgur.com/3O2Gz1p.jpeg", "caption": "Hoje tem noite de Jazz e Blues a partir das 20h. Garanta seu lugar!", "timestamp": "2024-07-26T19:30:00Z" },
         { "postId": 103, "type": "photo", "url": "https://i.imgur.com/YJgCmsA.jpeg", "caption": "Nosso drink especial da semana: 'Blue Note'. Já provou?", "timestamp": "2024-07-26T16:00:00Z" }
@@ -67,5 +67,32 @@
     ] },
     { "id": 22, "name": "Blue Note São Paulo", "vibe": "Romântico", "budget": "R$$", "description": "Famoso clube de jazz com shows intimistas e ambiente sofisticado na Av. Paulista.", "horario": "Shows às 20h e 22h30 (consultar agenda)", "address": "Avenida Paulista, 2073 - 2º Andar - Consolação, São Paulo - SP", "posts": [
         { "postId": 123, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Venha nos conhecer! O ambiente está perfeito para você hoje. ✨", "timestamp": "2024-07-26T12:18:00Z" }
+    ], "promotion": "50% de desconto no couvert artístico para estudantes." },
+    { "id": 23, "name": "Riviera Bar", "vibe": "Agitado", "budget": "R$$", "description": "Clássico da noite paulistana, com ótimos drinks e ambiente nostálgico no final da Paulista.", "horario": "Seg-Qua: 18h-00h, Qui-Sáb: 18h-03h", "address": "Avenida Paulista, 2584 - Consolação, São Paulo - SP", "posts": [
+        { "postId": 124, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Noite clássica no Riviera. 🍸", "timestamp": "2024-07-27T20:00:00Z" }
+    ], "promotion": "Gin Tônica clássica por R$ 25 no balcão." },
+    { "id": 24, "name": "Caledonia Whisky & Co.", "vibe": "Tranquilo", "budget": "R$$", "description": "O templo do whisky em SP. Ambiente intimista e carta incrível.", "horario": "Ter-Sáb: 18h-00h", "address": "Rua Vupabussu, 309 - Pinheiros, São Paulo - SP", "posts": [
+        { "postId": 125, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Degustação especial hoje! 🥃", "timestamp": "2024-07-27T19:00:00Z" }
+    ] },
+    { "id": 25, "name": "Tan Tan", "vibe": "Agitado", "budget": "R$$", "description": "Bar e restaurante asiático moderno, sempre cheio e com ótimos coquetéis.", "horario": "Ter-Dom: 19h-23:30h", "address": "Rua Fradique Coutinho, 153 - Pinheiros, São Paulo - SP", "posts": [
+        { "postId": 126, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Noodles e drinks: a combinação perfeita. 🍜🍹", "timestamp": "2024-07-27T21:00:00Z" }
+    ], "promotion": "Dose dupla de Sake nas terças." },
+    { "id": 26, "name": "Skye Bar", "vibe": "Romântico", "budget": "R$$$", "description": "Rooftop icônico no Hotel Unique com vista panorâmica e piscina vermelha.", "horario": "Seg-Dom: 18h-00:30h", "address": "Avenida Brigadeiro Luís Antônio, 4700 - Jardim Paulista, São Paulo - SP", "posts": [
+        { "postId": 127, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "A vista mais bonita de SP. ❤️", "timestamp": "2024-07-27T22:00:00Z" }
+    ] },
+    { "id": 27, "name": "Seen São Paulo", "vibe": "Agitado", "budget": "R$$$", "description": "Bar e restaurante no topo do Tivoli Mofarrej, com DJ e vista 360º.", "horario": "Seg-Qui: 19h-01h, Sex-Sáb: 19h-02h", "address": "Alameda Santos, 1437 - Jardim Paulista, São Paulo - SP", "posts": [
+        { "postId": 128, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Sábado à noite nas alturas! 🌃", "timestamp": "2024-07-27T23:00:00Z" }
+    ], "promotion": "Welcome drink gratuito para reservas antecipadas." },
+    { "id": 28, "name": "Terraço Itália", "vibe": "Romântico", "budget": "R$$$", "description": "Um dos restaurantes mais tradicionais e românticos da cidade, com vista incrível.", "horario": "Seg-Dom: 12h-00h", "address": "Avenida Ipiranga, 344 - República, São Paulo - SP", "posts": [
+        { "postId": 129, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Jantar inesquecível com essa vista. 🍷", "timestamp": "2024-07-27T20:30:00Z" }
+    ] },
+    { "id": 29, "name": "Baretto", "vibe": "Tranquilo", "budget": "R$$$", "description": "Bar intimista dentro do Hotel Fasano, considerado um dos melhores do mundo. Jazz e silêncio.", "horario": "Seg-Sáb: 19h-02h", "address": "Rua Vittorio Fasano, 88 - Jardins, São Paulo - SP", "posts": [
+        { "postId": 130, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Elegância e jazz. 🎷", "timestamp": "2024-07-28T21:00:00Z" }
+    ] },
+    { "id": 30, "name": "Kinoshita", "vibe": "Tranquilo", "budget": "R$$$", "description": "Culinária Kappo japonesa de altíssimo nível em um ambiente zen e silencioso.", "horario": "Seg-Sáb: 19h-23h", "address": "Rua Jacques Félix, 405 - Vila Nova Conceição, São Paulo - SP", "posts": [
+        { "postId": 131, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "A arte do detalhe. 🍣", "timestamp": "2024-07-28T20:00:00Z" }
+    ] },
+    { "id": 31, "name": "A Figueira Rubaiyat", "vibe": "Tranquilo", "budget": "R$$$", "description": "Ícone da cidade, jantar sob uma figueira centenária. Sofisticado e amplo.", "horario": "Seg-Dom: 12h-00h", "address": "Rua Haddock Lobo, 1738 - Jardins, São Paulo - SP", "posts": [
+        { "postId": 132, "type": "photo", "url": "https://i.imgur.com/gC28i3f.jpeg", "caption": "Almoço de domingo inesquecível. 🌳", "timestamp": "2024-07-28T13:00:00Z" }
     ] }
 ]
