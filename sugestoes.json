@@ -1,5 +1,5 @@
 [
-    { "id": 1, "name": "Noname Boteco", "vibe": "Agitado", "budget": "R$", "description": "Cerveja gelada e petiscos em um ambiente despojado com cadeiras de praia.", "horario": "Seg-Qua: 18h-00h, Qui-Sex: 18h-01h, Sáb: 17h-01h", "address": "Rua dos Pinheiros, 585 - Pinheiros, São Paulo - SP", "posts": [
+    { "id": 1, "name": "Noname Boteco", "vibe": "Agitado", "budget": "R$", "description": "Cerveja gelada e petiscos em um ambiente despojado com cadeiras de praia.", "horario": "Seg-Qua: 18h-00h, Qui-Sex: 17h-01h, Sáb: 17h-01h", "address": "Rua dos Pinheiros, 585 - Pinheiros, São Paulo - SP", "posts": [
         { "postId": 101, "type": "photo", "url": "https://i.imgur.com/8i2aE2b.jpeg", "caption": "Happy hour começando com a cerveja mais gelada da cidade! 🍻 #VemProNoname", "timestamp": "2024-07-26T18:05:00Z" }
     ], "promotion": "Hoje tem double chopp até as 20h!"},
     { "id": 2, "name": "Estepe Bar", "vibe": "Agitado", "budget": "R$", "description": "Bar de esquina com mesinhas na calçada, conhecido por atrair um público jovem e descolado.", "horario": "Seg-Dom: 15h-00h", "address": "Rua Cunha Gago, 588 - Pinheiros, São Paulo - SP", "posts": [
